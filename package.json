@@ -1,0 +1,11 @@
+{
+  "name": "smartgit-tools",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Standalone Linux SmartGit evaluation and private machine ID tools",
+  "scripts": {
+    "smartgit:evaluation": "python3 smartgit_evaluation.py",
+    "smartgit:privacy": "python3 smartgit_private_id.py",
+    "test": "python3 -m unittest discover -v"
+  }
+}
