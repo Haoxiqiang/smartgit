@@ -16,6 +16,17 @@ python3 smartgit_private_id.py uninstall  # 恢复桌面入口，保留 ID 和�
 
 安装后退出所有 SmartGit 进程，再从应用菜单启动。直接运行系统 `smartgit` 命令不会使用专用 ID。系统 ID 不变；此功能不是完整的隐私沙箱。
 
+一键修复并启动（在图形会话中运行，无需 `sudo`）：
+
+```bash
+./repair-smartgit.sh          # 重装桌面入口，启动并验证实际 JVM 的 ID 映射
+./repair-smartgit.sh --check  # 只检查正在运行的 JVM，不修改配置
+```
+
+重复执行保留现有 ID。若已有未使用专用 ID 的实例，脚本会提示正常退出后重试，不强制终止进程。启动通过 `gio launch` 使用明确的用户桌面文件；启动输出位于 `~/.config/smartgit-private/startup.log`（或对应 XDG 配置目录），权限为 `0600`。无法读取运行进程时会报错，不会声称验证成功。
+
+原有 `smartgit_private_id.py check` 仅证明新建子进程的映射正常，不能证明现有窗口已生效。新脚本检查 `/proc/<pid>/root` 下实际 JVM 看到的 ID 文件；检查通过也不代表应用授权状态改变，授权资格与期限仍由官方决定。
+
 ## 官方试用凭证
 
 使用系统 ID 申请和验证：
